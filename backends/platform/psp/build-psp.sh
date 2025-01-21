@@ -11,8 +11,8 @@ export CXXFLAGS
 make distclean
 ./configure --host=psp --disable-debug --enable-plugins --default-dynamic --enable-release
 make -j4
-VERSION=`make print-distversion`
-DISTS=`make print-dists`
+export VERSION="$(make print-distversion)"
+export DISTS="$(make print-dists)"
 mkdir scummvm-$VERSION
 cp -r $DISTS EBOOT.PBP plugins scummvm-$VERSION
 mkdir scummvm-$VERSION/kbd
