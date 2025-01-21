@@ -1,10 +1,13 @@
 #!/bin/bash
 
-export PATH=/opt/toolchains/psp/bin:$PATH
-export PSPDEV=/opt/toolchains/psp
-CXXFLAGS="-isystem /opt/toolchains/psp/include"
+## Make sure PSPDEV is set
+if [ -z "${PSPDEV}" ]; then
+    echo "The PSPDEV environment variable has not been set"
+    exit 1
+fi
+
+CXXFLAGS="-isystem ${PSPDEV}/psp/include"
 export CXXFLAGS
-export LDFLAGS=-L/opt/toolchains/psp/lib
 make distclean
 ./configure --host=psp --disable-debug --enable-plugins --default-dynamic --enable-release
 make -j4
